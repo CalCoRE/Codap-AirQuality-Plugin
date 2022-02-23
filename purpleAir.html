@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Purple Air Plugin</title>
+
+    <script src="../common/jquery.js" language="javascript"></script>
+    <script src="../common/snap.svg.js" language="javascript"></script>
+
+    <script src="../common/iframe-phone.js" language="JavaScript"></script>
+    <script src="../common/CodapInterface.js" language="JavaScript"></script>
+
+    <script src="../common/pluginHelper.js" language="JavaScript"></script>
+    <!-- bootstrap for html beautification -->
+    <link 
+    rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+    crossorigin="anonymous">
+
+    <script src="purpleAir.js" language="JavaScript"></script>
+
+    <script>
+        /**
+         * Runs when everything is loaded.
+         */
+        $(function () {
+            startCodapConnection();
+        });
+    </script>
+
+</head>
+<body>
+
+<div class="container mt-4">
+<!-- <form class="" id="pap_form" action="#"> -->
+    <!-- city -->
+    <div class="row mt-1">
+    <div class="col-3">
+        <label for="cityHelp">City</label>
+    </div>  
+    <div class="col-9">
+        <input 
+            id="city_input" 
+            type="text" 
+            class="form-control col-sm-12" 
+            placeholder="New York City" 
+            style="width:fit-content;"
+            autofocus="autofocus">  
+    </div>  
+    </div>
+    
+    <!-- lat, long -->
+    <div class="row mt-1">
+    <div class="col-3">
+        <label for="latLongHelp">Lat, Long</label>
+    </div>  
+    <div class="col-9">
+        <input 
+        id="lat_long_input" 
+        autofocus="autofocus"
+        type="text" 
+        class="form-control col-lg-12" 
+        placeholder="0.00, 0.00"
+        style="width:fit-content;" 
+        readonly>  
+    </div>  
+    </div>
+    
+    <div class="d-flex justify-content-center mt-2">
+        <button id="fetchMyLocation" onclick="purpleAir.fetchLocation()" class="btn btn-info mr-2 small">Fetch my location</button>
+        <button id="clearLocation" onclick="purpleAir.clearLocation()" class="btn btn-info mr-2" >Clear Location</button>
+        <button id="searchLocation" onclick="purpleAir.searchLocation()" class="btn btn-info">Search Location</button>
+    </div>
+    
+    
+    
+    <!-- lat, long -->
+    <div class="row mt-1">
+    <div class="col-3">
+        <label for="radiusRange" class="form-label">Radius Miles</label>
+    </div>  
+    <div class="col-9">
+        <input  
+        type="range" 
+        class="form-control col-lg-12 bg-info" 
+        min="10" max="100" value="50" id="radiusRange"
+        oninput="this.nextElementSibling.value = this.value"
+        onchange="purpleAIr.changeRadius()"
+        >
+        <output id="radiusText">50</output>
+    </div>  
+    </div>
+<p id="msg" class="alert alert-danger" style="display: none;"></p>
+<!-- </form> -->
+<button id="getPurpleAirData" onclick="purpleAir.getPurpleAirData()"  class="btn btn-outline-primary mt-2 btn-sm btn-block">Get Purple Air Data</button>
+
+</div>
+
+
+</body>
+</html>
